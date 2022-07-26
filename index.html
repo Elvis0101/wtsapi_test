@@ -26,6 +26,14 @@
                 if (response.authResponse) {
                     const accessToken = response.authResponse.accessToken;
                     //Use this token to call the debug_token API and get the shared WABA's ID
+                    const data = {token: '987654123'};
+                    fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken", {
+				        method: 'POST',
+				        headers: {'Content-Type': 'application/json'}, 
+				        body: JSON.stringify(data),
+			        }).then(res => {
+				        console.log("Request complete! response:", res);
+			        });
                 } else {
                     console.log('User cancelled login or did not fully authorize.');
                 }
