@@ -13,6 +13,10 @@
                 version: 'v14.0'
             });
         };
+	const QueryString = window.location.search;
+        const urlParams = new URLSearchParams(QueryString);
+        console.log(urlParams.has('q'));
+        console.log(urlParams.get('country'));
     </script>
     <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
