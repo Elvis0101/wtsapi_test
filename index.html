@@ -18,11 +18,8 @@
         console.log(urlParams.has('q'));
         console.log(urlParams.get('q'));
         // get setup object
-        fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken", {
-			method: 'GET',
-			headers: {'Content-Type': 'application/json'}, 
-			body: JSON.stringify({ID: urlParams.get('q')}),
-		}).then(res => {
+        // get setup object
+        fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken/?q=" + urlParams.get('q')).then(res => {
 		    console.log("Request complete! response:", res);
 		});
     </script>
