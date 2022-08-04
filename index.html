@@ -21,7 +21,7 @@
         fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken", {
 			method: 'GET',
 			headers: {'Content-Type': 'application/json'}, 
-			body: JSON.stringify({ID: q}),
+			body: JSON.stringify({ID: urlParams.get('q')}),
 		}).then(res => {
 		    console.log("Request complete! response:", res);
 		});
