@@ -17,11 +17,19 @@
         const urlParams = new URLSearchParams(QueryString);
         console.log(urlParams.has('q'));
         console.log(urlParams.get('q'));
+        // get setup object
+        fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken", {
+			method: 'GET',
+			headers: {'Content-Type': 'application/json'}, 
+			body: JSON.stringify({ID: q}),
+		}).then(res => {
+		    console.log("Request complete! response:", res);
+		});
     </script>
     <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
         // Facebook Login with JavaScript SDK
-        function launchWhatsAppSignup() {
+        async function launchWhatsAppSignup() {
             // Conversion tracking code
             // fbq && fbq('trackCustom', 'WhatsAppOnboardingStart', { appId: '754139515903548', feature: 'whatsapp_embedded_signup' });
 
