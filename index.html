@@ -19,9 +19,13 @@
         console.log(urlParams.get('q'));
         // get setup object
         // get setup object
-        fetch("https://us-central1-wtsapitest.cloudfunctions.net/getSetupObj/?q=" + urlParams.get('q')).then(res => {
-		console.log("Request complete! response:", res.json());
-	});
+        fetch("https://us-central1-wtsapitest.cloudfunctions.net/getSetupObj/?q=" + urlParams.get('q'))
+        .then(res => {
+		    return res.JSON();
+		})
+        .then(data => {
+            console.log(data.body);
+        });
     </script>
     <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
