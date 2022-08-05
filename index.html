@@ -20,8 +20,7 @@
         // get setup object
         // get setup object
         fetch("https://us-central1-wtsapitest.cloudfunctions.net/getSetupObj/?q=" + urlParams.get('q')).then(res => {
-		console.log("Request complete! response:", res.body);
-		console.log(res.body.business.name);
+		console.log("Request complete! response:", res.json());
 	});
     </script>
     <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
