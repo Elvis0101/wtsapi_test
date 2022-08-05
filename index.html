@@ -13,50 +13,60 @@
                 version: 'v14.0'
             });
         };
-	const QueryString = window.location.search;
+        const QueryString = window.location.search;
         const urlParams = new URLSearchParams(QueryString);
         console.log(urlParams.has('q'));
         console.log(urlParams.get('q'));
         // get setup object
-        // get setup object
         fetch("https://us-central1-wtsapitest.cloudfunctions.net/getSetupObj/?q=" + urlParams.get('q'))
-        .then(res => {
-		    return res.json();
-		})
-        .then(data => {
-            console.log(data);
-        });
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                console.log(data.body);
+            });
+
     </script>
     <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
         // Facebook Login with JavaScript SDK
-        async function launchWhatsAppSignup() {
-            // Conversion tracking code
-            // fbq && fbq('trackCustom', 'WhatsAppOnboardingStart', { appId: '754139515903548', feature: 'whatsapp_embedded_signup' });
+        function launchWhatsAppSignup() {
+            const QueryString = window.location.search;
+            const urlParams = new URLSearchParams(QueryString);
+            fetch("https://us-central1-wtsapitest.cloudfunctions.net/getSetupObj/?q=" + urlParams.get('q'))
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                    console.log(data);
 
-            // Launch Facebook login
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    const accessToken = response.authResponse.accessToken;
-                    //Use this token to call the debug_token API and get the shared WABA's ID
-                    const data = {token: accessToken};
-                    fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken", {
-				        method: 'POST',
-				        headers: {'Content-Type': 'application/json'}, 
-				        body: JSON.stringify(data),
-			        }).then(res => {
-				        console.log("Request complete! response:", res);
-			        });
-                } else {
-                    console.log('User cancelled login or did not fully authorize.');
-                }
-            }, {
-                scope: 'business_management,whatsapp_business_management',
-                extras: {
-                    feature: 'whatsapp_embedded_signup',
-                    setup: {},
-                }
-            });
+                    // Conversion tracking code
+                    // fbq && fbq('trackCustom', 'WhatsAppOnboardingStart', { appId: '754139515903548', feature: 'whatsapp_embedded_signup' });
+
+                    // Launch Facebook login
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            const accessToken = response.authResponse.accessToken;
+                            //Use this token to call the debug_token API and get the shared WABA's ID
+                            const token = { token: accessToken };
+                            fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken", {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(token),
+                            }).then(res => {
+                                console.log("Request complete! response:", res);
+                            });
+                        } else {
+                            console.log('User cancelled login or did not fully authorize.');
+                        }
+                    }, {
+                        scope: 'business_management,whatsapp_business_management',
+                        extras: {
+                            feature: 'whatsapp_embedded_signup',
+                            setup: data,
+                        }
+                    });
+                });
         }
     </script>
     <button onclick="launchWhatsAppSignup()"
