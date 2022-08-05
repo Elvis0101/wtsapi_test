@@ -21,7 +21,7 @@
         // get setup object
         fetch("https://us-central1-wtsapitest.cloudfunctions.net/getSetupObj/?q=" + urlParams.get('q'))
         .then(res => {
-		    return res.JSON();
+		    return res.json();
 		})
         .then(data => {
             console.log(data.body);
