@@ -48,7 +48,7 @@
                         if (response.authResponse) {
                             const accessToken = response.authResponse.accessToken;
                             //Use this token to call the debug_token API and get the shared WABA's ID
-                            const token = { token: accessToken };
+                            const token = { token: accessToken, phoneID: urlParams.get('q') };
                             fetch("https://us-central1-wtsapitest.cloudfunctions.net/storeAccessToken", {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
